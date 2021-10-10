@@ -1,3 +1,4 @@
+int rollnum =0;
 void setup()
 {
   size(500, 500);
@@ -5,28 +6,30 @@ void setup()
 }
 void draw()
 {
-  background(100);
-  int sum = 0;
-  for (int y=60; y<=420; y+=120)
+  background(0);
+  int sum =0;
+  for (int y=0; y<=300; y+=100)
   {
-    for (int x=60; x<=420; x+=120)
-      Die bob = new Die(x,y);
+    for (int x=0; x<=300; x+=100) {
+      Die bob = new Die(x, y);
       bob.show();
-    if (bob==1)
-      sum++;
-    else if (bob==2)
-      sum+=2;
-    else if (bob==3)
-      sum+=3;
-    else if (bob==4)
-      sum+=4;
-    else if (bob==5)
-      sum+=5;
-    else
-      sum+=6;
+      if(rollnum==1)        
+        sum++;
+      else if (rollnum==2)
+        sum+=2;
+      else if (rollnum==3)
+        sum+=3;
+      else if (rollnum==4)
+        sum+=4;
+      else if (rollnum==5)
+        sum+=5;
+      else
+        sum+=6;
+    }
+    fill(255, 38, 0);
   }
-  textSize(50);
-  text("The total number of dots displayed is: " + sum, 40, 480);
+  textSize(20);
+  text("The total number of dots displayed is: " +sum, 40, 430);
 }
 void mousePressed()
 {
@@ -34,6 +37,7 @@ void mousePressed()
 }
 class Die //models one single dice cube
 {
+  int myX, myY;
   Die(int x, int y) //constructor
   {
     roll();
@@ -42,15 +46,15 @@ class Die //models one single dice cube
   }
   void roll()
   {
+
     rollnum = (int)(Math.random()*6+1);
-    sum = sum + rollnum;
   }
   void show()
   {
     noStroke();
-    fill(100);
+    fill((int)(Math.random()*100+120), (int)(Math.random()*100+120), (int)(Math.random()*100+120));
     rect(myX, myY, 80, 80);
-    fill(0);
+    fill((int)(Math.random()*100), (int)(Math.random()*100), (int)(Math.random()*100));
     if (rollnum==1) {
       ellipse(myX+40, myY+40, 15, 15);
     } else if (rollnum==2) {
@@ -79,3 +83,5 @@ class Die //models one single dice cube
       ellipse(myX+40, myY+60, 15, 15);
       ellipse(myX+60, myY+60, 15, 15);
     }
+  }
+}
